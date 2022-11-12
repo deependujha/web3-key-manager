@@ -1,9 +1,10 @@
 import '../styles/globals.css';
-import Nav_baar from '../components/landingPage/Nav_baar';
+import Nav_baar from '../components/layout/Nav_baar';
 import Head from 'next/head';
 import { useState } from 'react';
 import store from '../redux/store';
 import { Provider } from 'react-redux';
+import  Foo_ter  from '../components/layout/Foo_ter';
 
 function MyApp({ Component, pageProps }) {
 	const [currPage, setCurrPage] = useState('home');
@@ -22,6 +23,7 @@ function MyApp({ Component, pageProps }) {
 				<Nav_baar currPage={currPage} />
 				<hr />
 				<Component {...pageProps} setCurrPage={setCurrPage} />
+				<Foo_ter/>
 			</Provider>
 		</>
 	);
