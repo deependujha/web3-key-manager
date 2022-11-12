@@ -4,6 +4,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const Nav_baar = ({ currPage }) => {
+	const connectWallet = async () => {
+		console.log("Clicked on 'connect_wallet'");
+	};
+
 	return (
 		<div className="bg-gray-500">
 			<Navbar fluid={true} rounded={true}>
@@ -23,9 +27,14 @@ const Nav_baar = ({ currPage }) => {
 					</Link>
 				</span>
 				<div className="flex md:order-2">
-					<Button className="bg-red-500 hover:bg-red-700">
-						Connect_Wallet
+					<Button
+						outline={true}
+						gradientDuoTone="pinkToOrange"
+						onClick={connectWallet}
+					>
+						Connect Wallet
 					</Button>
+
 					<Navbar.Toggle />
 				</div>
 				<Navbar.Collapse>
