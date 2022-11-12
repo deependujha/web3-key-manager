@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "flowbite-react";
 
-const CardScreen = () => {
+const CardScreen = ({image , heading , text}) => {
   return (
     <Card>
       <div className="flex flex-col items-center pb-10">
@@ -10,11 +10,11 @@ const CardScreen = () => {
           src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
           alt="Bonnie image"
         />
-        <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-          Bonnie Green
-        </h5>
-        <span className="text-sm text-gray-500 dark:text-gray-400">
-          Visual Designer
+        <div className="mb-1 text-xl text-gray-900 dark:text-white font-bold">
+          {heading}
+        </div>
+        <span className="text-sm text-gray-500 dark:text-gray-400 my-2">
+          {text}
         </span>
       </div>
     </Card>
