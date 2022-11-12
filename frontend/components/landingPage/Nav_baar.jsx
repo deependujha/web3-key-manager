@@ -23,7 +23,7 @@ const Nav_baar = ({ currPage }) => {
 					</Link>
 				</span>
 				<div className="flex md:order-2">
-					<Button className="bg-red-500 hover:bg-red-700">
+					<Button className="bg-red-500">
 						Connect_Wallet
 					</Button>
 					<Navbar.Toggle />
