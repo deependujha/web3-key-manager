@@ -8,12 +8,14 @@ const Home_screen = () => {
 			<div className="grid grid-cols-2 gap-4">
 				<div className="mx-20 my-auto">
 					<div>
-						<div className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black
-						 my-10 underline">
+						<div
+							className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black
+						 my-10 underline"
+						>
 							Web3 key manager
 						</div>
 						<div
-							className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white "
+							className="text-xl sm:text-4xl  font-mono text-white "
 							style={{ height: '200px' }}
 						>
 							<Typed

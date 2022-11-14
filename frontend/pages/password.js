@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
+import SquareBox from '../components/password/SquareBox';
 import styles from '../styles/Home.module.css';
-
 
 const password = ({ setCurrPage }) => {
 	useEffect(() => {
@@ -9,8 +9,10 @@ const password = ({ setCurrPage }) => {
 	}, []);
 
 	return (
-		<div className={styles.container}>
-			<div>password</div>
+		<div className={`${styles.container} flex items-center justify-center h-screen`}>
+			<div>
+				<SquareBox />
+			</div>
 		</div>
 	);
 };
