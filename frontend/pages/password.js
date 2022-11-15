@@ -15,8 +15,6 @@ const password = ({ setCurrPage }) => {
 			className={`${styles.container} flex items-center justify-center h-screen bg-gradient-to-r from-[#d13049] to-[#f2cbcb]`}
 		>
 			<div>
-				{/* <CreateRandomPassword /> */}
-				{/* <YourPasswords /> */}
 				<PasswordComponent />
 			</div>
 		</div>
