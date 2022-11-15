@@ -10,7 +10,6 @@ import { useRouter } from 'next/router';
 
 const CreateNew = () => {
 	const router = useRouter();
-	const mySigner = useSelector((state) => state.usr.signer);
 	const myContract = useSelector((state) => state.usr.contract);
 	let newPasswd = {
 		project: '',
