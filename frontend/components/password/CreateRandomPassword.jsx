@@ -29,46 +29,48 @@ const CreateRandomPassword = ({password, directlySetPassword}) => {
 	};
 
 	return (
-		<div style={{ width: '70vw', backgroundColor: 'white', maxWidth: '70vw' }}>
-			<div>
-				<label
-					htmlFor="minmax-range"
-					className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-				>
-					password length: {length}
-				</label>
-				<input
-					id="minmax-range"
-					type="range"
-					min="4"
-					max="32"
-					name="length"
-					value={length}
-					onChange={(e) => {
-						setLength(e.target.value);
-					}}
-					className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-				/>
-			</div>
-			<Button
-				onClick={generateP}
-				style={{ width: '50%' }}
-				gradientDuoTone="pinkToOrange"
-			>
-				Generate password
-			</Button>
+    <div style={{ width: "70vw", backgroundColor: "white", maxWidth: "70vw" }}>
+      <div className="px-8 my-6">
+        <label
+          htmlFor="minmax-range"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >
+          password length: {length}
+        </label>
+        <input
+          id="minmax-range"
+          type="range"
+          min="4"
+          max="16"
+          name="length"
+          value={length}
+          onChange={(e) => {
+            setLength(e.target.value);
+          }}
+          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+        />
+      </div>
+      <div className='my-6 px-8'>
+        <Button
+          onClick={generateP}
+          gradientDuoTone="pinkToOrange"
+        >
+          Generate password
+        </Button>
 
-			<div>{password === '' ? 'Generate password' : 'your password is:'}</div>
-			{password !== '' && (
-				<div className="flex justify-between">
-					<span className=""> {password}</span>
-					<Button gradientMonochrome="failure" onClick={copyPassword}>
-						{copytxt}
-					</Button>
-				</div>
-			)}
-		</div>
-	);
+		  
+        <div className='my-1'>{password === "" ? "Generate password" : "your password is:"}</div>
+        {password !== "" && (
+          <div className='flex justify-between'>
+            <div className="my-2"> {password}</div>
+            <Button gradientMonochrome="failure" onClick={copyPassword}>
+              {copytxt}
+            </Button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default CreateRandomPassword;
