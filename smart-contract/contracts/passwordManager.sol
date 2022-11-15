@@ -14,7 +14,7 @@ contract PasswordManager {
 
     mapping(address => password[]) myPassword;
 
-    function createNew(string memory _key, string memory _value) public {
+    function createNewKey(string memory _key, string memory _value) public {
         uint l = myPassword[msg.sender].length;
         for (uint i = 0; i < l; i++) {
             require(

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUsr } from '../../redux/slices/usrData';
+import ABI from '../../ABI.js';
 
 const Nav_baar = ({ currPage }) => {
 	const getSigner = useSelector((state) => state.usr.signer);
@@ -20,12 +21,12 @@ const Nav_baar = ({ currPage }) => {
 			const { chainId } = await provider.getNetwork();
 
 			// if connected chain is not 'Goerli', switch network.
-			if (chainId !== 5) {
+			if (chainId !== 80001) {
 				ethereum.request({
 					method: 'wallet_switchEthereumChain',
 					params: [
 						{
-							chainId: '0x5',
+							chainId: '0x13881',
 						},
 					],
 				});
@@ -46,11 +47,11 @@ const Nav_baar = ({ currPage }) => {
 			// it takes three parameters => {contract's address, abi, signer/provider}
 			// provider can perform read only transactions
 			// signer can perform all kind of transactions
-			// let contract = new ethers.Contract(
-			// 	'0x57b8556A95ecc904F58Fc5876CBEF62ab0f29F5f',
-			// 	ABI,
-			// 	signer
-			// );
+			let contract = new ethers.Contract(
+				'0x7D15D4D01E7f142e667BdBC041d6CE1dDe9A4768',
+				ABI,
+				signer
+			);
 			// setMyContract(contract);
 			// console.log(contract.address);
 		} else {
