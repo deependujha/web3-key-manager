@@ -38,6 +38,7 @@ const Home_screen = () => {
 						width="639"
 						height="200"
 						alt="loading..."
+						priority={true}
 					/>
 				</div>
 			</div>
