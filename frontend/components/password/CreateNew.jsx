@@ -3,8 +3,15 @@ import CreateRandomPassword from './CreateRandomPassword';
 import TypePassword from './TypePassword';
 import { Card, Button } from 'flowbite-react';
 import Swal from 'sweetalert2';
+import pinataSDK from '@pinata/sdk';
+import lit from '../../lit_protocol/lit';
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 
 const CreateNew = () => {
+	const router = useRouter();
+	const mySigner = useSelector((state) => state.usr.signer);
+	const myContract = useSelector((state) => state.usr.contract);
 	let newPasswd = {
 		project: '',
 		password: '',
@@ -19,7 +26,7 @@ const CreateNew = () => {
 		setCreateNew({ ...createNew, password: val });
 	};
 
-	const saveOnBlockChain = () => {
+	const saveOnBlockChain = async () => {
 		if (createNew.project === '') {
 			// alert('Please write the application/project name');
 			Swal.fire({
@@ -50,8 +57,122 @@ const CreateNew = () => {
 			}
 			return;
 		}
+		// console.log('data is: ', createNew);
+		const { encryptedString, encryptedSymmetricKey } = await lit.encrypt(
+			createNew.password
+		);
+		const encryptedStringInDataURI = await blobToDataURI(encryptedString);
+		const myJson = {
+			encrypedPassword: encryptedStringInDataURI,
+			encryptedSymmetricKey: encryptedSymmetricKey,
+		};
+		const pinata = new pinataSDK(
+			'51220cd04fd72ad817b7',
+			'7f0f1867048b0182ac840660dac6341cb6a39bce45415db0be2cb31ae9874cc0'
+		);
 
-		console.log('data is: ', createNew);
+		const options = {
+			pinataMetadata: {
+				name: 'timeForGlory',
+				keyvalues: {
+					customKey: 'keep',
+					customKey2: 'hustling',
+				},
+			},
+			pinataOptions: {
+				cidVersion: 1,
+			},
+		};
+
+		pinata
+			.pinJSONToIPFS(myJson, options)
+			.then((result) => {
+				//handle results here
+				console.log(
+					'printing IPFS hash of the uploaded password: ',
+					result.IpfsHash
+				);
+				// setIPFSHash(result.IpfsHash);
+				myContract
+					.createNewKey(createNew.project, result.IpfsHash)
+					.then((tx) => {
+						console.log('transaction occured : ', tx.hash);
+						return tx
+							.wait()
+							.then(() => {
+								// console.log('Key and ipfs hash saved successfully');
+								Swal.fire({
+									title: 'Done',
+									text: 'Your password has been saved securely successfully',
+									icon: 'success',
+									confirmButtonColor: '#D6465B',
+								});
+							})
+							.catch((err) => {
+								Swal.fire({
+									icon: 'error',
+									title: 'Oops... Error occurred',
+									text: err,
+									confirmButtonColor: '#D6465B',
+								});
+							});
+					})
+					.catch((err) => {
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops... Error occurred',
+							text: err,
+							confirmButtonColor: '#D6465B',
+						});
+					});
+			})
+			.catch((err) => {
+				//handle error here
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops... Error occurred',
+					text: err,
+					confirmButtonColor: '#D6465B',
+				});
+			});
+		router.push('/');
+	};
+
+	// (Helper) Turn blob data to data URI
+	// @param { Blob } blob
+	// @return { Promise<String> } blob data in data URI
+	//
+	const blobToDataURI = (blob) => {
+		return new Promise((resolve, reject) => {
+			var reader = new FileReader();
+
+			reader.onload = (e) => {
+				var data = e.target.result;
+				resolve(data);
+			};
+			reader.readAsDataURL(blob);
+		});
+	};
+
+	//
+	// (Helper) Convert data URI to blob
+	// @param { String } dataURI
+	// @return { Blob } blob object
+	//
+	const dataURItoBlob = (dataURI) => {
+		console.log(dataURI);
+
+		var byteString = window.atob(dataURI.split(',')[1]);
+		var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+		var ab = new ArrayBuffer(byteString.length);
+		var ia = new Uint8Array(ab);
+		for (var i = 0; i < byteString.length; i++) {
+			ia[i] = byteString.charCodeAt(i);
+		}
+
+		var blob = new Blob([ab], { type: mimeString });
+
+		return blob;
 	};
 
 	return (
