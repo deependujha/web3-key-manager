@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Button } from 'flowbite-react';
-import Image from 'next/image';
 
-const SquareBox = () => {
+const CreateRandomPassword = () => {
 	const [length, setLength] = useState(14);
 	const [password, setPassword] = useState('');
 	const [copytxt, setCopytxt] = useState('copy');
@@ -31,8 +30,7 @@ const SquareBox = () => {
 	};
 
 	return (
-		<div>
-			<div className="max-w-sm">
+			<div className="max-w-lg">
 				<Card>
 					<h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
 						Generate strong random password
@@ -75,8 +73,7 @@ const SquareBox = () => {
 					)}
 				</Card>
 			</div>
-		</div>
 	);
 };
 
-export default SquareBox;
+export default CreateRandomPassword;
