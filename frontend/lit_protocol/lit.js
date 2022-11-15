@@ -1,7 +1,7 @@
 import LitJsSdk from '@lit-protocol/sdk-browser';
 
 const client = new LitJsSdk.LitNodeClient();
-const chain = 'ethereum';
+const chain = 'mumbai';
 
 // Checks if the user has at least 0 ETH
 const accessControlConditions = [

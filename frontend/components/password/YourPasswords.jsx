@@ -17,6 +17,7 @@ const YourPasswords = () => {
 
 	const myFunc = () => {
 		setLoading(true);
+		console.log(myContract);
 		myContract
 			.getMyPassword()
 			.then((response) => {
@@ -25,13 +26,24 @@ const YourPasswords = () => {
 					axios
 						.get(`https://gateway.pinata.cloud/ipfs/${response[i].value}`)
 						.then(async (myJson) => {
-							const enPass = myJson.encrypedPassword;
-							const encryptedSymmetricKey = myJson.encryptedSymmetricKey;
+							// console.log('printing myjson', myJson);
+							const enPass = myJson.data.encrypedPassword;
+							const encryptedSymmetricKey = myJson.data.encryptedSymmetricKey;
 							const deependu = await dataURItoBlob(enPass);
 							// console.log('encrypted text: ', encryptedText);
-							const decrypted = await lit.decrypt(deependu, enSymmetricKey);
-							console.log('decrypted text: ', decrypted);
-							response[i].value = decrypted;
+							const decrypted = await lit.decrypt(
+								deependu,
+								encryptedSymmetricKey
+							);
+							// console.log('decrypted text: ', decrypted);
+							// myKeys[i].value = decrypted;
+							// const msg = [...myKeys, {[response[i].key]: decrypted}];
+							setMyKeys((prevState) => [
+								...prevState,
+								{ [response[i].key]: decrypted },
+							]);
+							console.log('key: ', response[i].key);
+							console.log('password: ', decrypted);
 						})
 						.catch((err) => {
 							console.log(
@@ -40,12 +52,35 @@ const YourPasswords = () => {
 							console.log(err);
 						});
 				}
+				console.log('printing my keys: ', myKeys);
 			})
 			.catch((err) => {
 				console.log('Error occurred: ', err);
 			});
 		setLoading(false);
 	};
+
+	//
+	// (Helper) Convert data URI to blob
+	// @param { String } dataURI
+	// @return { Blob } blob object
+
+	const dataURItoBlob = (dataURI) => {
+		console.log(dataURI);
+
+		var byteString = window.atob(dataURI.split(',')[1]);
+		var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+		var ab = new ArrayBuffer(byteString.length);
+		var ia = new Uint8Array(ab);
+		for (var i = 0; i < byteString.length; i++) {
+			ia[i] = byteString.charCodeAt(i);
+		}
+
+		var blob = new Blob([ab], { type: mimeString });
+
+		return blob;
+	};
+
 	useEffect(() => {
 		myFunc();
 	}, []);

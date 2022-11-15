@@ -41,7 +41,6 @@ const Nav_baar = ({ currPage }) => {
 			let signer = provider.getSigner();
 			// console.log('connected with metamask');
 			// console.log("user's address: ", await signer.getAddress());
-			dispatch(updateUsr({ signer, contract: '' }));
 
 			// creating an instance of the smart contract
 			// it takes three parameters => {contract's address, abi, signer/provider}
@@ -52,6 +51,9 @@ const Nav_baar = ({ currPage }) => {
 				ABI,
 				signer
 			);
+
+			dispatch(updateUsr({ signer, contract }));
+
 			// setMyContract(contract);
 			// console.log(contract.address);
 		} else {
