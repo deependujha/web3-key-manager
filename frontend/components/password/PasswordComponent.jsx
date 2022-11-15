@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CreateNew from './CreateNew';
 import CreateRandomPassword from './CreateRandomPassword';
 import YourPasswords from './YourPasswords';
 
@@ -53,7 +54,7 @@ const PasswordComponent = () => {
 			>
 				{current === 'create' ? (
 					<div>
-						<CreateRandomPassword />
+						<CreateNew />
 					</div>
 				) : (
 					<div>

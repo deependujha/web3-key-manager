@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Card, Button } from 'flowbite-react';
 
-const CreateRandomPassword = () => {
+const CreateRandomPassword = ({password, directlySetPassword}) => {
 	const [length, setLength] = useState(14);
-	const [password, setPassword] = useState('');
 	const [copytxt, setCopytxt] = useState('copy');
 
 	/* Function to generate combination of password */
@@ -18,7 +17,7 @@ const CreateRandomPassword = () => {
 			pass += str.charAt(char);
 		}
 
-		setPassword(pass);
+		directlySetPassword(pass);
 		setCopytxt('copy');
 	}
 
@@ -30,49 +29,45 @@ const CreateRandomPassword = () => {
 	};
 
 	return (
-		<Card>
-			<div
-				style={{ width: '70vw', backgroundColor: 'white', maxWidth: '70vw' }}
-			>
-				<div>
-					<label
-						htmlFor="minmax-range"
-						className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-					>
-						password length: {length}
-					</label>
-					<input
-						id="minmax-range"
-						type="range"
-						min="4"
-						max="32"
-						name="length"
-						value={length}
-						onChange={(e) => {
-							setLength(e.target.value);
-						}}
-						className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-					/>
-				</div>
-				<Button
-					onClick={generateP}
-					style={{ width: '50%' }}
-					gradientDuoTone="pinkToOrange"
+		<div style={{ width: '70vw', backgroundColor: 'white', maxWidth: '70vw' }}>
+			<div>
+				<label
+					htmlFor="minmax-range"
+					className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
 				>
-					Generate password
-				</Button>
-
-				<div>{password === '' ? 'Generate password' : 'your password is:'}</div>
-				{password !== '' && (
-					<div className="flex justify-between">
-						<span className=""> {password}</span>
-						<Button gradientMonochrome="failure" onClick={copyPassword}>
-							{copytxt}
-						</Button>
-					</div>
-				)}
+					password length: {length}
+				</label>
+				<input
+					id="minmax-range"
+					type="range"
+					min="4"
+					max="32"
+					name="length"
+					value={length}
+					onChange={(e) => {
+						setLength(e.target.value);
+					}}
+					className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+				/>
 			</div>
-		</Card>
+			<Button
+				onClick={generateP}
+				style={{ width: '50%' }}
+				gradientDuoTone="pinkToOrange"
+			>
+				Generate password
+			</Button>
+
+			<div>{password === '' ? 'Generate password' : 'your password is:'}</div>
+			{password !== '' && (
+				<div className="flex justify-between">
+					<span className=""> {password}</span>
+					<Button gradientMonochrome="failure" onClick={copyPassword}>
+						{copytxt}
+					</Button>
+				</div>
+			)}
+		</div>
 	);
 };
 
