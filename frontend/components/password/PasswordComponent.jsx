@@ -29,7 +29,9 @@ const PasswordComponent = () => {
 				<li className="w-full">
 					<button
 						onClick={() => setCurrent('saved')}
-						className="inline-block p-4 w-full bg-gray-50 rounded-tl-lg hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600 "
+						className={`inline-block p-4 w-full bg-gray-50 rounded-tl-lg hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600 ${
+							current === 'saved' ? 'text-red-500' : ''
+						}`}
 					>
 						Your passwords
 					</button>
@@ -37,7 +39,9 @@ const PasswordComponent = () => {
 				<li className="w-full">
 					<button
 						onClick={() => setCurrent('create')}
-						className="inline-block p-4 w-full bg-gray-50 rounded-tl-lg hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600"
+						className={`inline-block p-4 w-full bg-gray-50 rounded-tl-lg hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600 ${
+							current === 'create' ? 'text-red-500' : ''
+						}`}
 					>
 						Create new password
 					</button>

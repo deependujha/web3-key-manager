@@ -9,15 +9,10 @@ const YourPasswords = () => {
 		{ key: 'github', value: 'alpha' },
 	];
 	return (
-		<div className="max-w-lg">
-			<Card>
-				<h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
-					Your Passwords
-				</h5>
-				{passwd.map((pass, index) => (
-					<KeyValue key={index} name={pass.key} value={pass.value} />
-				))}
-			</Card>
+		<div style={{ width: '70vw', backgroundColor: 'white' }}>
+			{passwd.map((pass, index) => (
+				<KeyValue key={index} name={pass.key} value={pass.value} />
+			))}
 		</div>
 	);
 };
