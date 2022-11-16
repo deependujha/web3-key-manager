@@ -54,12 +54,13 @@ const YourPasswords = () => {
 				}
 				console.log('eiaoifaiohfiahfioahiofhuiahiuahfuii');
 				console.log('printing my keys: ', nitesh);
+				setLoading(false);
 			})
 			.catch((err) => {
 				console.log('Error occurred: ', err);
 			});
 
-		setLoading(false);
+		
 	};
 
 	//

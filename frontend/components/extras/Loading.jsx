@@ -6,7 +6,7 @@ import styles from "../../styles/Home.module.css";
 const Loading = () => {
   return (
     <div
-      className={`${styles.container} flex items-center justify-center h-screen`}
+      className={`${styles.container} flex items-center justify-center`}
     >
       <div>
         <ReactLoading
