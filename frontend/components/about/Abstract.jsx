@@ -3,9 +3,12 @@ import React from 'react';
 const Abstract = () => {
 	return (
 		<div>
-			<div>Web3-key-manager is a decentralized password manager.</div>
 			<div>
-				Use Lit infrastructure and decentralized storage (IPFS) to create a
+				<span className="font-bold text-red-500">Web3-key-manager </span>
+				is a decentralized password manager.
+			</div>
+			<div>
+				Uses Lit infrastructure and decentralized storage (IPFS) to create a
 				user-facing password manager.
 			</div>
 			<div>
