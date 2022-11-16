@@ -9,41 +9,38 @@ const YourPasswords = () => {
 	const [myKeys, setMyKeys] = useState([]);
 	const [loading, setLoading] = useState(false);
 
-	const passwd = [
-		{ key: 'facebook', value: 'deependu' },
-		{ key: 'instagram', value: 'nitesh' },
-		{ key: 'github', value: 'alpha' },
-	];
+	// const passwd = [
+	// 	{ key: 'facebook', value: 'deependu' },
+	// 	{ key: 'instagram', value: 'nitesh' },
+	// 	{ key: 'github', value: 'alpha' },
+	// ];
 
-	const myFunc = () => {
+	const myFunc = async () => {
+		let nitesh = [];
 		setLoading(true);
 		console.log(myContract);
 		myContract
 			.getMyPassword()
 			.then((response) => {
-				setMyKeys(response);
 				for (let i = 0; i < response.length; i++) {
 					axios
 						.get(`https://gateway.pinata.cloud/ipfs/${response[i].value}`)
 						.then(async (myJson) => {
-							// console.log('printing myjson', myJson);
 							const enPass = myJson.data.encrypedPassword;
 							const encryptedSymmetricKey = myJson.data.encryptedSymmetricKey;
 							const deependu = await dataURItoBlob(enPass);
-							// console.log('encrypted text: ', encryptedText);
 							const decrypted = await lit.decrypt(
 								deependu,
 								encryptedSymmetricKey
 							);
-							// console.log('decrypted text: ', decrypted);
-							// myKeys[i].value = decrypted;
-							// const msg = [...myKeys, {[response[i].key]: decrypted}];
-							setMyKeys((prevState) => [
-								...prevState,
-								{ [response[i].key]: decrypted },
-							]);
-							console.log('key: ', response[i].key);
-							console.log('password: ', decrypted);
+
+							const beta = response[i].key;
+							const miaMalkova = {
+								key: response[i].key,
+								value: decrypted.decryptedString,
+							};
+							nitesh.push(miaMalkova);
+							setMyKeys([...nitesh]);
 						})
 						.catch((err) => {
 							console.log(
@@ -52,11 +49,13 @@ const YourPasswords = () => {
 							console.log(err);
 						});
 				}
-				console.log('printing my keys: ', myKeys);
+				console.log('eiaoifaiohfiahfioahiofhuiahiuahfuii');
+				console.log('printing my keys: ', nitesh);
 			})
 			.catch((err) => {
 				console.log('Error occurred: ', err);
 			});
+
 		setLoading(false);
 	};
 
