@@ -3,11 +3,14 @@ import KeyValue from './KeyValue';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import lit from '../../lit_protocol/lit';
+import Loading from '../extras/Loading';
 
 const YourPasswords = () => {
 	const myContract = useSelector((state) => state.usr.contract);
 	const [myKeys, setMyKeys] = useState([]);
 	const [loading, setLoading] = useState(false);
+
+	
 
 	// const passwd = [
 	// 	{ key: 'facebook', value: 'deependu' },
@@ -51,12 +54,13 @@ const YourPasswords = () => {
 				}
 				console.log('eiaoifaiohfiahfioahiofhuiahiuahfuii');
 				console.log('printing my keys: ', nitesh);
+				setLoading(false);
 			})
 			.catch((err) => {
 				console.log('Error occurred: ', err);
 			});
 
-		setLoading(false);
+		
 	};
 
 	//
@@ -83,13 +87,23 @@ const YourPasswords = () => {
 	useEffect(() => {
 		myFunc();
 	}, []);
+	
 	return (
-		<div style={{ width: '70vw', backgroundColor: 'white' }}>
-			{myKeys.map((pass, index) => (
-				<KeyValue key={index} name={pass.key} value={pass.value} />
-			))}
-		</div>
-	);
+    <div>
+      {loading === true ? (
+        <div>
+          {" "}
+          <Loading />{" "}
+        </div>
+      ) : (
+        <div style={{ width: "70vw", backgroundColor: "white" }}>
+          {myKeys.map((pass, index) => (
+            <KeyValue key={index} name={pass.key} value={pass.value} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default YourPasswords;
