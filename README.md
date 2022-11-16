@@ -1,4 +1,5 @@
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](readme_resources/web3key.mp4)
+[![Watch the video](readme_resources/thumbnail.png)](readme_resources/web3key.mp4)
+## click on the pic to watch video of the project ☝️
 
 # W3b3-Key-Manager 🔥🚀
 
