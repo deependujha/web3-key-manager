@@ -4,7 +4,7 @@ const Abstract = () => {
 	return (
 		<div>
 			<div>
-				<span className="font-bold text-red-500">Web3-key-manager </span>
+				<span className="font-bold ">Web3-key-manager </span>
 				is a decentralized password manager.
 			</div>
 			<div>

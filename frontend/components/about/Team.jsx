@@ -4,7 +4,7 @@ const Team = () => {
 	return (
 		<div>
 			<div className='mb-2'>
-				<div className="font-bold text-md text-red-500">Deependu Jha</div>
+				<div className="font-bold text-md ">Deependu Jha</div>
 				<div>
 					Full-Stack Blockchain Developer | Next.JS | Solidity | Hyperledger
 					fabric | HardHat | Ether.JS | Express Js | LIT Protocol | Lens
@@ -15,8 +15,8 @@ const Team = () => {
 					Banglore, India
 				</div>
 			</div>
-			<div>
-				<div className="font-bold text-md text-red-500">Nitesh Kumar</div>
+			<div className='pb-10'>
+				<div className="font-bold text-md ">Nitesh Kumar</div>
 				<div>
 					Full-Stack Blockchain Developer | Next.JS | Solidity | HardHat |
 					Ether.JS | Express.Js
