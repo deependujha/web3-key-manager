@@ -49,4 +49,11 @@ This project was made for **'EarnWeb3'**, which is being conducted by **['LearnW
 ## Source code of the project:
 [Web3-Key-Manager](https://github.com/deependujha/web3-key-manager)
 
+--- 
+## Note: If you are trying to setup this project, then:
+``` js
+npm i  // if doesn't works use below command
+npm i -f
+```
+
 #### Thanks.
